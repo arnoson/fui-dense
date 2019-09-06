@@ -45,7 +45,7 @@ export default {
       const side = this.direction === 'vertical' ? 'top' : 'right'
       const checkboard= `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='lightgray'%3E%3Cpath d='M0 0h10v10H0zm10 10h10v10H10z'/%3E%3C/svg%3E")`
 
-      return `linear-gradient(to ${side}, transparent, ${this.opaqueColor}), ${checkboard}`
+      return `linear-gradient(to ${side}, transparent, ${this.opaqueColor})`//, ${checkboard}`
     }
   }
 }
