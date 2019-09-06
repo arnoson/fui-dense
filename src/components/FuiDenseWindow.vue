@@ -63,7 +63,8 @@ export default {
       referenceCorner: { x: 0, y: 0 },
       listeners: {
         referenceMouseEnter: () => this.referenceHover = true,
-        referenceMouseLeave: () => this.referenceHover = false
+        referenceMouseLeave: () => this.referenceHover = false,
+        resize: () => this.updateReferencePoint()
       }
     }
   },
@@ -109,6 +110,11 @@ export default {
       this.updateReferencePoint()
       this.updateReferenceCorner()
     }
+    window.addEventListener('resize', this.listeners.resize)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.listeners.resize)
   },
 
   methods: {
