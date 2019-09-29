@@ -46,7 +46,8 @@ export default {
         this.colorPickerId = windowManager.open({
           schema,
           data: { color },
-          parent: this.windowId
+          parent: this.windowId,
+          reference: this.id
         })
       } else {
         windowManager.focus(this.colorPickerId)

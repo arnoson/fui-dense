@@ -9,7 +9,7 @@
     @mouseleave="onMouseLeave"
   )
     FuiReferenceLine(
-      v-show="showReferenceLine"
+      v-if="showReferenceLine"
       :from="referencePoint"
       :to="referenceCorner"
     )
@@ -198,6 +198,8 @@ export default {
           x: bounds.x + bounds.width / 2,
           y: bounds.y + bounds.height / 2
         }
+      } else {
+        this.referencePoint = undefined
       }
     },
 

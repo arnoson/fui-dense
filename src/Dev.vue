@@ -24,21 +24,9 @@ const schema = {
   // layout: 'comma-separated',
   components: {
     stroke: {
-      type: 'window-link',
-      caption: 'stroke',
-      window: {
-        autoClose: true,
-        components: {
-          width: {
-            type: 'number',
-            label: 'stroke width'
-          },
-          color: {
-            type: 'color',
-            label: 'stroke color'
-          }
-        }
-      }
+      type: 'select',
+      placeholder: 'wählenFarbeSie',
+      options: ['rot', 'grün', 'blau']
     }
   }
 }

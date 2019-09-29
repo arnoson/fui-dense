@@ -10,6 +10,7 @@ import { default as colorPicker } from './types/TypeColorPicker'
 import { default as colorComponent } from './types/TypeColorComponent'
 import { default as colorHue } from './types/TypeColorHue'
 import { default as colorAlpha } from './types/TypeColorAlpha'
+import { default as select } from './types/TypeSelect'
 import { default as slider } from './types/TypeSlider'
 import { default as pad } from './types/TypePad'
 import { default as windowLink } from './types/TypeWindowLink'
@@ -29,6 +30,7 @@ export default {
     'color-component': colorComponent,
     'color-hue': colorHue,
     'color-alpha': colorAlpha,
+    select,
     slider,
     pad,
     'window-link': windowLink
