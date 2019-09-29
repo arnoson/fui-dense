@@ -1,6 +1,11 @@
 <template lang="pug">
+  //- Set a tab index to enable key events on the div.
   .type-select(
+    tabindex="0"
     v-outside:mousedown="collapse"
+    @keydown.up="onArrowUp"
+    @keydown.down="onArrowDown"
+    @keydown.enter="selectHighlightedOption"
   )
     .type-select-title(
       v-if="!expanded"
@@ -10,12 +15,18 @@
       v-else
     )
       .type-select-option(
-        v-for="option in options.options"
+        v-for="(option, index) in options.options"
+        :class="{ highlighted: highlightedIndex === index }"
         @click="selectOption(option)"
+        @mousemove="highlightedIndex = index"
+        @mouseleave="highlightedIndex = null"
       )
-        span.type-select-icon(
-          v-html="(selectedOption === option) ? '&#10004;' : '–'"
-        )
+        span.type-select-icon.type-select-check(
+          v-if="selectedOption === option"
+        ) &#10004;
+        span.type-select-icon.type-select-dash(
+          v-else
+        ) –
         span {{ option }}
 </template>
 
@@ -29,7 +40,7 @@ export default {
     return {
       expanded: false,
       selectedOption: null,
-      hoveredOption: null
+      highlightedIndex: null
     }
   },
 
@@ -42,15 +53,43 @@ export default {
   methods: {
     expand() {
       this.expanded = true
+
+      // Highlight the selected option (if it exists) insted of the hovered
+      // one.
+      const { options } = this.options
+      this.highlightedIndex = this.selectedOption
+        ? options.indexOf(this.selectedOption)
+        : this.expandHoveredIndex
     },
 
     collapse() {
       this.expanded = false
+      this.mouseMoved = false
     },
 
     selectOption(option) {
       this.selectedOption = option
       this.collapse()
+    },
+
+    selectHighlightedOption() {
+      const { options } = this.options
+      this.selectOption(options[this.highlightedIndex])
+    },
+
+    /* Highlight the previous option. */
+    onArrowUp() {
+      if (this.highlightedIndex > 0) {
+        this.highlightedIndex -= 1
+      }
+    },
+
+    /* Highlight the next option. */
+    onArrowDown() {
+      const { options } = this.options
+      if (this.highlightedIndex < options.length - 1) {
+        this.highlightedIndex += 1
+      }
     }
   }
 }
@@ -58,6 +97,8 @@ export default {
 
 <style lang="scss">
 .type-select {
+  outline: none;
+
   &-options {
     position: absolute;
     border: 1px solid black;
@@ -79,7 +120,7 @@ export default {
     cursor: pointer;
   }
 
-  &-option:hover {
+  &-option.highlighted {
     background: yellow;
   }
 
@@ -87,15 +128,10 @@ export default {
     display: inline-block;
     width: 1em;
   }
-}
 
-
-
-.type-select.highlight-hover {
-  .type-select-option {
-    &:hover {
-      background: yellow;
-    }
+  &-dash {
+    // Optically center the dash.
+    padding-left: 0.14em;
   }
 }
 </style>
