@@ -71,10 +71,11 @@ export default {
 
   computed: {
     showReferenceLine() {
-      return (
-        !this.dragging &&
-        (!this.locked || this.hover || this.referenceHover)
-      )
+      return !this.locked || this.hover || this.referenceHover
+      // return (
+      //   !this.dragging &&
+      //   (!this.locked || this.hover || this.referenceHover)
+      // )
     },
 
     // Calculate the bounds based on the position and size, so we don't have
