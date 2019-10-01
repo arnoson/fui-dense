@@ -32,10 +32,7 @@ export default {
         reference: this.id,
         components: {
           color: {
-            type: 'color-picker',
-            on: {
-              input: color => this.$emit('input', color)
-            }
+            type: 'color-picker'
           }
         }
       }
@@ -44,7 +41,7 @@ export default {
         const { color } = this
         this.colorPickerId = windowManager.open({
           schema,
-          data: { color },
+          data: this.data,
           parent: this.schemaRoot.id,
           reference: this.id
         })
