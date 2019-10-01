@@ -11,7 +11,7 @@ import { windowManager, FuiType } from 'vue-fui'
 export default {
   extends: FuiType,
 
-  inject: ['windowId'],
+  inject: ['schemaRoot'],
 
   data() {
     return {
@@ -34,8 +34,7 @@ export default {
           color: {
             type: 'color-picker',
             on: {
-              input: color => this.$emit('input', color),
-              click: () => console.log('fuu')
+              input: color => this.$emit('input', color)
             }
           }
         }
@@ -46,7 +45,7 @@ export default {
         this.colorPickerId = windowManager.open({
           schema,
           data: { color },
-          parent: this.windowId,
+          parent: this.schemaRoot.id,
           reference: this.id
         })
       } else {

@@ -50,7 +50,8 @@ export default {
 
   provide() {
     return {
-      schemaParent: this
+      schemaParent: this,
+      schemaRoot: this
     }
   },
 
