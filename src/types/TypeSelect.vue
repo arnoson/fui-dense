@@ -50,6 +50,10 @@ export default {
     }
   },
 
+  created() {
+    this.selectedOption = this.value
+  },
+
   methods: {
     expand() {
       this.expanded = true
@@ -104,6 +108,7 @@ export default {
     border: 1px solid black;
     margin-top: -1px;
     margin-left: calc(-1px - 0.2em - 1em);
+    background: white;
   }
 
   &-option, &-title {

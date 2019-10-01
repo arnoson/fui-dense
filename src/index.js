@@ -24,7 +24,7 @@ export default {
   types: {
     text,
     number,
-    checkbox,
+    'check-box': checkbox,
     color,
     'color-picker': colorPicker,
     'color-component': colorComponent,
