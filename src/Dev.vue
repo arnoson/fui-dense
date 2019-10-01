@@ -1,5 +1,11 @@
 <template lang="pug">
   .dev
+    .monitor
+      .monitor-row(
+        v-for="(value, key) in data"
+      )
+        div {{ key }}
+        div {{ value }}
     Fui(
       :collection="collection"
       :data="data"
@@ -13,20 +19,53 @@ import 'vue-fui/dist/vue-fui.css'
 import collection from '@'
 
 const data = {
-  hallo: { red: 1, green: 0, blue: 0 },
-  stroke: {
-    width: 1,
-    color: 'blue'
+  boolean: false,
+  color: { red: 1, green: 0, blue: 0 },
+  number: 12,
+  select: '1',
+  slider: 0,
+  text: 'Mhhhh naja',
+  window: {
+    name: 'Fuuu'
   }
 }
 
 const schema = {
-  // layout: 'comma-separated',
+  layout: 'comma-separated',
   components: {
-    stroke: {
+    boolean: {
+      type: 'check-box',
+      label: 'Ja?'
+    },
+    color: {
+      type: 'color',
+      label: 'Color'
+    },
+    number: {
+      type: 'number',
+      label: 'Number'
+    },
+    select: {
       type: 'select',
-      placeholder: 'wählenFarbeSie',
-      options: ['rot', 'grün', 'blau']
+      label: 'select',
+      options: ['1', '2', 'oder 3']
+    },
+    slider: {
+      type: 'slider',
+      label: 'Slider'
+    },
+    text: {
+      type: 'text',
+      label: 'Text'
+    },
+    window: {
+      type: 'window-link',
+      components: {
+        name: {
+          type: 'text',
+          label: 'Window name'
+        }
+      }
     }
   }
 }
@@ -56,6 +95,20 @@ html, body {
 }
 
 .fui {
-  padding: 50vw;
+  padding: 2em;
+}
+
+.monitor {
+  display: table;
+  border-collapse: collapse;
+  &-row {
+    display: table-row;
+    border: 1px solid;
+    > * {
+      padding: 0.1em 0.2em;
+      border: 1px solid;
+      display: table-cell;
+    }
+  }
 }
 </style>
